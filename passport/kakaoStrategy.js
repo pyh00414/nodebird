@@ -14,7 +14,6 @@ module.exports = passport => {
           const exUser = await User.find({
             where: { snsId: profile.id, provider: "kakao" }
           });
-          console.log(exUser);
           if (exUser) {
             done(null, exUser);
           } else {

@@ -28,9 +28,9 @@ module.exports = passport => {
           } else {
             done(null, false, { message: "가입되지 않은 회원입니다." });
           }
-        } catch (err) {
-          console.err(err);
-          done(err);
+        } catch (error) {
+          console.error(error);
+          done(error);
         }
       }
     )
