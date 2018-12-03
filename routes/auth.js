@@ -2,11 +2,11 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const { User } = require("../models");
-const { isLogedIn, isNotLogedIn } = require("./middlewares");
+const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
 const router = express.Router();
 
-router.post("/join", isNotLogedIn, async (req, res, next) => {
+router.post("/join", isNotLoggedIn, async (req, res, next) => {
   const { email, nick, password } = req.body;
   try {
     const exUser = await User.find({ where: { email } });
@@ -28,7 +28,7 @@ router.post("/join", isNotLogedIn, async (req, res, next) => {
   }
 });
 
-router.post("/login", isNotLogedIn, (req, res, next) => {
+router.post("/login", isNotLoggedIn, (req, res, next) => {
   // router.get(미들웨어1,미들웨어2,미들웨어3) -> 미들웨어1,2,3 순으로 진행. 지금은 isNotLogedIn부터 진행
   passport.authenticate("local", (authError, user, info) => {
     // ********** localStrategy의 done(a,b,c)에서 각각 autoError=a, b=user, c=info가 된다.
@@ -52,7 +52,7 @@ router.post("/login", isNotLogedIn, (req, res, next) => {
   })(req, res, next);
 });
 
-router.get("/logout", isLogedIn, (req, res) => {
+router.get("/logout", isLoggedIn, (req, res) => {
   req.logout(); // logout()은 passport에서 추가해주는 부분
   req.session.destroy(); // req.user을 지움
   res.redirect("/");
@@ -73,5 +73,3 @@ router.get(
 );
 
 module.exports = router;
-
-
