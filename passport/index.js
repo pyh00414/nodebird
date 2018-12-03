@@ -12,7 +12,21 @@ module.exports = passport => {
   passport.deserializeUser((id, done) => {
     // 매 요청마다 실행. app의 app.use(passport.session())에 의해 호출됨
 
-    User.find({ where: { id } })
+    User.find({
+      where: { id },
+      include: [
+        {
+          model: User,
+          attributes: ["id", "nick"],
+          as: "Followers"
+        },
+        {
+          model: User,
+          attributes: ["id", "nick"],
+          as: "Followings"
+        }
+      ]
+    })
       .then(user => done(null, user)) // user.id를 DB조회해서 req.user에 넣음. 모든 요청에 실행되기 때문에 DB조회를 캐싱해줘야 한다.
       .catch(err => done(err));
   });
