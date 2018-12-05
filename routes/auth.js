@@ -29,6 +29,7 @@ router.post("/join", isNotLoggedIn, async (req, res, next) => {
 });
 
 router.post("/login", isNotLoggedIn, (req, res, next) => {
+  console.log("@@");
   // router.get(미들웨어1,미들웨어2,미들웨어3) -> 미들웨어1,2,3 순으로 진행. 지금은 isNotLogedIn부터 진행
   passport.authenticate("local", (authError, user, info) => {
     // ********** localStrategy의 done(a,b,c)에서 각각 autoError=a, b=user, c=info가 된다.

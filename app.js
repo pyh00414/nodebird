@@ -46,7 +46,7 @@ app.use(passport.initialize()); // passport 설정을 초기화
 app.use(passport.session()); // passport localStrategy로 로그인할 때 사용자 정보를 세션에 저장, express session보다 아래 있어야함. **** passport의 deserializeUser를 실행 *********
 
 app.use("/", indexRouter);
-app.use("user", userRouter);
+app.use("/user", userRouter);
 app.use("/auth", authRouter);
 app.use("/post", postRouter);
 

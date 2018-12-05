@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) =>
     "post",
     {
       content: {
-        type: DataTypes.STRING(15),
+        type: DataTypes.STRING(100),
         allowNull: false
       },
       img: {

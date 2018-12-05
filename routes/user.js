@@ -4,7 +4,7 @@ const router = express.Router();
 const { isLoggedIn } = require("./middlewares");
 const { User } = require("../models");
 
-router.post("/:id/fol low", isLoggedIn),
+router.post("/:id/follow", isLoggedIn),
   async (req, res, next) => {
     try {
       const user = await User.find({ where: { id: req.user.id } });
