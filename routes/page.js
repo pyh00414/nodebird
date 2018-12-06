@@ -5,7 +5,7 @@ const { Post, User } = require("../models");
 const router = express.Router();
 
 router.get("/profile", isLoggedIn, (req, res) => {
-  res.render("profile", { title: "내 정보 - NodeBird", user: null });
+  res.render("profile", { title: "내 정보 - NodeBird", user: req.user });
 });
 
 router.get("/join", isNotLoggedIn, (req, res) => {
@@ -18,10 +18,17 @@ router.get("/join", isNotLoggedIn, (req, res) => {
 
 router.get("/", (req, res, next) => {
   Post.findAll({
-    include: {
-      model: User,
-      attributes: ["id", "nick"]
-    }
+    include: [
+      {
+        model: User,
+        attributes: ["id", "nick"]
+      },
+      {
+        model: User,
+        attributes: ["id", "nick"],
+        as: "Liker"
+      }
+    ]
   }).then(post => {
     res.render("main", {
       title: "NodeBird",
