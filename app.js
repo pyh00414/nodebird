@@ -22,7 +22,7 @@ passportConfig(passport);
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
-app.set("port", process.env.PRT || 8001);
+app.set("port", process.env.PORT || 8001);
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public"))); //main.css로 가져올 수 있음 (프론트에서 접근 경로)
